@@ -1,0 +1,184 @@
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProductions (20220222193102)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "productions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "genre" varchar, "description" text, "budget" float, "image" varchar, "director" varchar, "ongoing" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220222193102"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20220222193327)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "admin" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220222193327"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTickets (20220222193450)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tickets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "price" float, "user_id" integer NOT NULL, "production_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_538a036fb9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_01277cd501"
+FOREIGN KEY ("production_id")
+  REFERENCES "productions" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tickets_on_user_id" ON "tickets" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tickets_on_production_id" ON "tickets" ("production_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220222193450"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProductionRoles (20220222193922)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "production_roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar, "understudy" boolean, "production_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_d757bed95a"
+FOREIGN KEY ("production_id")
+  REFERENCES "productions" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_production_roles_on_production_id" ON "production_roles" ("production_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220222193922"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-02-22 19:40:02.653166"], ["updated_at", "2022-02-22 19:40:02.653166"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProduction Create (0.4ms)[0m  [1m[32mINSERT INTO "productions" ("title", "genre", "description", "budget", "image", "director", "ongoing", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Hamlet"], ["genre", "drama"], ["description", "The Tragedy of Hamlet, Prince of Denmark"], ["budget", 100000.0], ["image", "https://upload.wikimedia.org/wikipedia/commons/6/6a/Edwin_Booth_Hamlet_1870.jpg"], ["director", "Bill Shakespeare"], ["ongoing", 1], ["created_at", "2022-02-22 20:00:36.631803"], ["updated_at", "2022-02-22 20:00:36.631803"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProductionRole Create (0.4ms)[0m  [1m[32mINSERT INTO "production_roles" ("role", "understudy", "production_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["role", "Hamlet"], ["understudy", 1], ["production_id", 1], ["created_at", "2022-02-22 20:00:36.648708"], ["updated_at", "2022-02-22 20:00:36.648708"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mProduction Load (0.1ms)[0m  [1m[34mSELECT "productions".* FROM "productions"[0m
+  [1m[36mProductionRole Load (0.2ms)[0m  [1m[34mSELECT "production_roles".* FROM "production_roles"[0m
+Started GET "/" for ::1 at 2022-02-22 12:26:51 -0800
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/x/.rvm/gems/ruby-2.7.4/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/x/.rvm/gems/ruby-2.7.4/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.7ms | Allocations: 625)
+Completed 200 OK in 9ms (Views: 4.8ms | ActiveRecord: 0.0ms | Allocations: 3329)
+
+
+Started GET "/productions" for ::1 at 2022-02-22 12:27:12 -0800
+  
+SyntaxError (/Users/x/flatiron/122021/Phase-4-121321/01-intro-to-rails/flatiron-theater-api/app/controllers/productions_controller.rb:5: syntax error, unexpected '\n', expecting =>):
+  
+app/controllers/productions_controller.rb:5: syntax error, unexpected '\n', expecting =>
+app/controllers/productions_controller.rb:5: syntax error, unexpected '\n', expecting =>
+Started GET "/productions" for ::1 at 2022-02-22 12:27:25 -0800
+Processing by ProductionsController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/productions_controller.rb:4:in `index'
+  [1m[36mProduction Load (0.1ms)[0m  [1m[34mSELECT "productions".* FROM "productions"[0m
+  ↳ app/controllers/productions_controller.rb:4:in `index'
+Completed 200 OK in 17ms (Views: 9.6ms | ActiveRecord: 0.9ms | Allocations: 11681)
+
+
+Started GET "/productions/1" for ::1 at 2022-02-22 12:27:53 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/productions/1"):
+  
+Started GET "/productions/1" for ::1 at 2022-02-22 12:29:43 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1704)
+
+
+  
+NameError (undefined local variable or method `byebug' for #<ProductionsController:0x00000000004bc8>):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:30:03 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1694)
+
+
+  
+NameError (undefined local variable or method `byebug' for #<ProductionsController:0x00000000005370>):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:30:39 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 677)
+
+
+  
+NoMethodError (undefined method `pry' for #<Binding:0x00007f840e4daac8>
+Did you mean?  try):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:30:52 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1693)
+
+
+  
+NameError (undefined local variable or method `byebug' for #<ProductionsController:0x000000000063d8>):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:31:16 -0800
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms | Allocations: 17064)
+
+
+  
+NameError (undefined local variable or method `byebug' for #<ProductionsController:0x00000000003bb0>):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:31:58 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/productions_controller.rb:9:in `show'
+  [1m[36mProduction Load (0.1ms)[0m  [1m[34mSELECT "productions".* FROM "productions" WHERE "productions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/productions_controller.rb:9:in `show'
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 12192)
+
+
+Started GET "/productions/1" for ::1 at 2022-02-22 12:32:46 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/productions_controller.rb:9:in `show'
+  [1m[36mProduction Load (0.1ms)[0m  [1m[34mSELECT "productions".* FROM "productions" WHERE "productions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/productions_controller.rb:9:in `show'
+  [1m[36mProductionRole Load (0.1ms)[0m  [1m[34mSELECT "production_roles".* FROM "production_roles" WHERE "production_roles"."production_id" = ?[0m  [["production_id", 1]]
+  ↳ app/controllers/productions_controller.rb:10:in `show'
+Completed 200 OK in 35ms (Views: 25.8ms | ActiveRecord: 1.4ms | Allocations: 17722)
+
+
+Started GET "/productions/1" for ::1 at 2022-02-22 12:37:12 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1697)
+
+
+  
+NameError (undefined local variable or method `byebug' for #<ProductionsController:0x00000000005438>):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:37:51 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1727)
+
+
+  
+NameError (undefined local variable or method `debug' for #<ProductionsController:0x00000000005c30>
+Did you mean?  debugger):
+  
+app/controllers/productions_controller.rb:9:in `show'
+Started GET "/productions/1" for ::1 at 2022-02-22 12:38:08 -0800
+Processing by ProductionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed   in 6401879ms (Allocations: 219258)
+
+
