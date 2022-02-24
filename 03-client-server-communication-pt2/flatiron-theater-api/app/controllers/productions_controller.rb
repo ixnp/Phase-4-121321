@@ -1,4 +1,5 @@
 class ProductionsController < ApplicationController
+  
     #TODO: Move wrapped Paramaters 
     wrap_parameters format: []
     def index 
@@ -6,7 +7,6 @@ class ProductionsController < ApplicationController
     end 
 
     def show
-        byebug
         production = Production.find(params[:id])
         render json: production, include: :production_roles, status: :ok
     end 
@@ -14,19 +14,28 @@ class ProductionsController < ApplicationController
     def create
         production = Production.create!(production_params)
     #TODO: Clean up error handling
-    rescue ActiveRecord::RecordInvalid => invalid 
-        byebug
-        render json: {errors: invalid.record.errors}, status: :unprocessable_entity
-
     end 
 
     #TODO: Update
+    def update 
+        production = Production.find(params[:id])
+        production.update!(production_params)
+        render json: production, status: :ok
+    end 
 
     #TODO: Delete
 
+    def destroy
+        production = Production.find(params[:id])
+        production.destroy
+        head :no_content 
+    end 
+
     private
+
 
     def production_params
         params.permit(:title, :genre, :description, :budget, :image, :director, :ongoing)
     end 
+
 end
