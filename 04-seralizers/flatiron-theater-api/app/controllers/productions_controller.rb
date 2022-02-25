@@ -1,7 +1,4 @@
 class ProductionsController < ApplicationController
-  
-    #TODO: Move wrapped Paramaters 
-    wrap_parameters format: []
     def index 
         render json: Production.all, status: :ok
     end 
@@ -13,17 +10,13 @@ class ProductionsController < ApplicationController
 
     def create
         production = Production.create!(production_params)
-    #TODO: Clean up error handling
     end 
 
-    #TODO: Update
     def update 
         production = Production.find(params[:id])
         production.update!(production_params)
         render json: production, status: :ok
     end 
-
-    #TODO: Delete
 
     def destroy
         production = Production.find(params[:id])
