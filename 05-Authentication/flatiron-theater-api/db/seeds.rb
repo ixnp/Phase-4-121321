@@ -4,8 +4,8 @@ p2 = Production.create(title: 'cats', genre: 'musical', director:'Andrew Lloyd W
 
 ProductionRole.create(role:'Hamlet', understudy:true, production: p1)
 
-u1 = User.create(name:'ix', email:'email@email.com')
-u2 = User.create(name:'rose', email:'rose@cutecats.com')
+u1 = User.create(name:'ix', email:'email@gmail.com', password:'1234')
+u2 = User.create(name:'rose', email:'rose@gmail.com', password:'1234')
 
 
 Ticket.create(user:u1, production:p2, price:65.00)
