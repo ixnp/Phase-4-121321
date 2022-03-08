@@ -23,8 +23,7 @@ Heroku only supports specific versions of ruby. Of the versions it supports we r
 
 ```
  rvm install 2.7.4 --default
- gem install bundler
- gem install rails
+
 
 ```
 
